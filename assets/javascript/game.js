@@ -3,14 +3,17 @@ var correct = letters[Math.floor(Math.random()* 26)];
 var lives = 10;
 var win = 0;
 var lose = 0;
+var guess = [];
 
 document.onkeyup = function(event) {
     console.log(event.key);
-    var guess=event.key;
-    document.getElementById("guessed").innerHTML = document.getElementById("guessed").innerHTML + " " + guess;
-    if(guess === correct){
+    if (guess.includes(event.key) == false){
+        guess.push(event.key);
+    document.getElementById("guessed").innerHTML = "Guessed: " + guess.join(" ");
+    if(correct.includes(event.key)){
         win++;
         document.getElementById("wins").innerHTML = "Wins: " + win;
+        guess = [];
         document.getElementById("guessed").innerHTML = "Guessed:";
         correct = letters[Math.floor(Math.random()* 26)];
         lives = 10;
@@ -21,9 +24,10 @@ document.onkeyup = function(event) {
     } else {
         lose++
         document.getElementById("losses").innerHTML = "Losses: " + lose;
+        guess = [];
         document.getElementById("guessed").innerHTML = "Guessed:";
         correct = letters[Math.floor(Math.random()* 26)];
         lives = 10;
         document.getElementById("chance").innerHTML = "Chances left: " + lives;
     };
-};
+}};
